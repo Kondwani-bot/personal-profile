@@ -23,9 +23,21 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) =>
 
   const categories = [
     { id: 'all', label: 'All Systems' },
-    { id: 'automation', label: 'Automation & Workflows' },
-    { id: 'fullstack', label: 'Full-Stack Web' }
+    { id: 'ai-ml', label: 'AI & Intelligent Systems' },
+    { id: 'fullstack', label: 'Full-Stack Web' },
+    { id: 'automation', label: 'Automation & Workflows' }
   ];
+
+  const getCategoryLabel = (cat: string) => {
+    switch (cat) {
+      case 'ai-ml': return 'AI & Agents';
+      case 'automation': return 'Automation';
+      case 'fullstack': return 'Full-Stack';
+      case 'cybersecurity': return 'Cybersecurity';
+      case 'robotics': return 'Robotics';
+      default: return cat;
+    }
+  };
 
   const filteredProjects = projects.filter(p => {
     return selectedCategory === 'all' || p.category === selectedCategory;
@@ -102,7 +114,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) =>
                 {/* Category & Badges */}
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-900 uppercase tracking-wider border border-purple-200/80">
-                    {project.category}
+                    {getCategoryLabel(project.category)}
                   </span>
 
                   <div className="flex items-center gap-2">
