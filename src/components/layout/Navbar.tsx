@@ -68,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-40 px-3 sm:px-6 py-3 transition-all duration-300 transform ${
+      className={`fixed top-0 left-0 right-0 z-40 px-3 sm:px-6 py-3 transition-all duration-300 transform print:hidden print-hide ${
         isVisible 
           ? 'opacity-100 translate-y-0 pointer-events-auto' 
           : 'opacity-0 -translate-y-full pointer-events-none'

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { ProfileData, CertificateItem } from '../../types';
 import { 
-  Download, 
-  Printer, 
   ZoomIn, 
   ZoomOut, 
   RotateCcw, 
@@ -16,7 +14,8 @@ import {
   Linkedin,
   Github,
   Award,
-  BookOpen
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import { sound } from '../../utils/soundEffects';
 import { CertificateViewerModal } from '../common/CertificateViewerModal';
@@ -32,15 +31,10 @@ export const ProfessionalPdfViewer: React.FC<ProfessionalPdfViewerProps> = ({
 }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [zoomLevel, setZoomLevel] = useState<number>(100);
-  const [viewMode, setViewMode] = useState<'single' | 'continuous'>('continuous');
+  const [viewMode] = useState<'single' | 'continuous'>('continuous');
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
 
   const totalPages = 4;
-
-  const handlePrint = () => {
-    sound.playClick();
-    window.print();
-  };
 
   const handleOpenCertById = (certId: string) => {
     const found = profile.certificates.find(c => c.id === certId);
@@ -63,9 +57,9 @@ export const ProfessionalPdfViewer: React.FC<ProfessionalPdfViewerProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-100/90 rounded-3xl overflow-hidden border border-purple-200/90 shadow-2xl">
+    <div className="resume-viewer-root flex flex-col h-[calc(100vh-8.5rem)] min-h-[650px] bg-slate-100/90 rounded-3xl overflow-hidden border border-purple-200/90 shadow-2xl print:bg-transparent print:border-none print:shadow-none print:h-auto print:min-h-0 print:overflow-visible">
       {/* PDF Viewer Top Action Toolbar */}
-      <div className="glass-panel px-4 sm:px-6 py-3 border-b border-purple-100 flex flex-wrap items-center justify-between gap-3 shrink-0 z-10 bg-white/90">
+      <div id="pdf-viewer-toolbar" className="glass-panel px-4 sm:px-6 py-3 border-b border-purple-100 flex flex-wrap items-center justify-between gap-3 shrink-0 z-10 bg-white/90 print:hidden print-hide">
         {/* Left: Document Info */}
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-red-600/90 text-white flex items-center justify-center font-bold text-xs shadow-sm">
@@ -148,59 +142,43 @@ export const ProfessionalPdfViewer: React.FC<ProfessionalPdfViewerProps> = ({
             </button>
           </div>
 
-          {/* Continuous vs Single View Toggle */}
-          <button
-            id="pdf-view-mode-toggle"
-            onClick={() => {
-              setViewMode(m => m === 'continuous' ? 'single' : 'continuous');
-              sound.playClick();
-            }}
-            className="px-2.5 py-1.5 rounded-xl text-xs font-semibold glass-button text-slate-700 border border-purple-200 transition-colors cursor-pointer hover:text-purple-800"
-          >
-            {viewMode === 'continuous' ? 'Single Page' : 'All 4 Pages'}
-          </button>
-
-          {/* Print Button */}
-          <button
-            id="pdf-print-button"
-            onClick={handlePrint}
-            className="p-2 rounded-xl text-slate-700 glass-button border border-purple-200 transition-colors cursor-pointer hover:text-purple-800"
-            title="Print Document"
-          >
-            <Printer className="w-4 h-4 text-purple-800" />
-          </button>
-
-          {/* Download Button */}
+          {/* Open in New Tab Button */}
           <a
-            id="pdf-download-button"
-            href="#download"
-            onClick={(e) => {
-              e.preventDefault();
-              sound.playLevelUp();
-              window.print();
-            }}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer border border-purple-600"
+            id="pdf-open-new-tab"
+            href="/Derrick_K_Mbewe_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sound.playClick()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold glass-button text-slate-700 border border-purple-200 transition-colors cursor-pointer hover:text-purple-800"
+            title="Open original resume PDF in a new tab"
           >
-            <Download className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">Save PDF</span>
+            <ExternalLink className="w-3.5 h-3.5 text-purple-700" />
+            <span>Open PDF</span>
           </a>
         </div>
       </div>
 
       {/* Main Document Content Container */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-8 flex flex-col items-center gap-8 bg-slate-200/70">
-        {/* Render pages depending on continuous or single mode */}
-        {(viewMode === 'continuous' ? [1, 2, 3, 4] : [currentPage]).map(pageNumber => (
-          <div
-            key={`page-${pageNumber}`}
-            id={`resume-page-${pageNumber}`}
-            style={{ width: `${Math.round(8.27 * 96 * (zoomLevel / 100))}px` }}
-            className="bg-white text-slate-900 shadow-2xl rounded-sm p-8 sm:p-12 relative border border-slate-300 font-sans transition-all print:w-full print:shadow-none print:border-none print:p-6"
-          >
-            {/* Top Page Watermark & Page Number */}
-            <div className="absolute top-4 right-6 text-[10px] font-mono text-slate-400 uppercase tracking-widest print:hidden">
-              Page {pageNumber} of 4
-            </div>
+      <div className="resume-pages-container flex-1 overflow-y-auto overflow-x-auto p-4 sm:p-8 flex flex-col items-center gap-10 sm:gap-14 bg-slate-200/80 print:bg-white print:p-0 print:gap-0 print:overflow-visible">
+        {/* Render pages: Always renders all 4 for printing, and filters for screen if single-page mode */}
+        {[1, 2, 3, 4].map(pageNumber => {
+          const isVisibleOnScreen = viewMode === 'continuous' || currentPage === pageNumber;
+          return (
+            <div
+              key={`page-${pageNumber}`}
+              id={`resume-page-${pageNumber}`}
+              style={{ 
+                width: `${Math.round(8.27 * 96 * (zoomLevel / 100))}px`,
+                maxWidth: zoomLevel <= 100 ? '100%' : 'none'
+              }}
+              className={`resume-print-page bg-white text-slate-900 shadow-2xl rounded-md p-8 sm:p-12 relative border border-slate-300/80 font-sans transition-all shrink-0 min-h-[1050px] sm:min-h-[1123px] box-border ${
+                isVisibleOnScreen ? 'block' : 'hidden print:block'
+              } print:w-full print:max-w-none print:shadow-none print:border-none print:p-0 print:m-0 print:bg-white`}
+            >
+              {/* Top Page Watermark & Page Number */}
+              <div className="absolute top-4 right-6 text-[10px] font-mono text-slate-400 uppercase tracking-widest print:hidden select-none">
+                Page {pageNumber} of 4
+              </div>
 
             {/* PAGE 1 CONTENT */}
             {pageNumber === 1 && (
@@ -395,9 +373,9 @@ export const ProfessionalPdfViewer: React.FC<ProfessionalPdfViewerProps> = ({
                       </div>
                     </li>
                     <li>
-                      <strong className="text-purple-900">Member, Zambia Robotics</strong>
-                      <div className="pl-4 text-xs text-slate-700">
-                        ○ Represented the country at the international First Global Robotics Challenge.
+                      <strong className="text-purple-900">National Representative & Core Robotics Engineer, Zambia Robotics Team (Singapore)</strong>
+                      <div className="pl-4 text-xs text-slate-700 mt-0.5">
+                        ○ Represented the Republic of Zambia internationally at the 2023 FIRST Global Robotics Challenge in Singapore (Singapore EXPO), tackling global environmental engineering challenges alongside 190+ nations.
                       </div>
                     </li>
                     <li>
@@ -537,8 +515,8 @@ export const ProfessionalPdfViewer: React.FC<ProfessionalPdfViewerProps> = ({
                       </div>
                     </li>
                     <li>● Certificate of Secondary School Completion</li>
-                    <li>● Certificate for Completing the First Global Video Training Course</li>
-                    <li>● Certificate for Competing in the First Global Robotics Challenge</li>
+                    <li>● <strong>FIRST Global Challenge Certificate of International Participation (Singapore 2023)</strong> – Team Zambia (Derrick Kondwani Mbewe)</li>
+                    <li>● Certificate for Completing the FIRST Global Video Training Course</li>
                   </ul>
                 </div>
               </div>
@@ -701,6 +679,40 @@ export const ProfessionalPdfViewer: React.FC<ProfessionalPdfViewerProps> = ({
                         </div>
                       </div>
                     </div>
+
+                    {/* FIRST Global Robotics Certificates */}
+                    <div className="bg-purple-50/70 p-3 rounded-xl border border-purple-200">
+                      <div className="font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                        <Award className="w-4 h-4 text-purple-700" />
+                        FIRST Global Robotics International Certificates (Team Zambia • Singapore):
+                      </div>
+                      <div className="space-y-1.5 pl-4 text-xs">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-mono text-[11px] text-slate-600 truncate">
+                            📄 FIRST_Global_Singapore_Participation_Certificate_Kondwani_Mbewe.pdf
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleOpenCertById('cert-first-global-singapore')}
+                            className="text-purple-700 hover:text-purple-900 font-bold underline flex items-center gap-1 shrink-0 text-[11px] cursor-pointer"
+                          >
+                            <Eye className="w-3 h-3" /> View Certificate
+                          </button>
+                        </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-mono text-[11px] text-slate-600 truncate">
+                            📄 FIRST_Global_Video_Training_Certificate_Kondwani_Mbewe.pdf
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleOpenCertById('cert-first-global-video')}
+                            className="text-purple-700 hover:text-purple-900 font-bold underline flex items-center gap-1 shrink-0 text-[11px] cursor-pointer"
+                          >
+                            <Eye className="w-3 h-3" /> View Certificate
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -740,7 +752,8 @@ export const ProfessionalPdfViewer: React.FC<ProfessionalPdfViewerProps> = ({
               </div>
             )}
           </div>
-        ))}
+        );
+      })}
       </div>
 
       {/* In-Code Certificate Viewer Modal */}

@@ -151,14 +151,24 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ profile })
               <span>National Honors & Extracurricular Leadership</span>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {profile.extracurriculars.map((extra) => (
-                <div key={extra.id} className="text-xs text-slate-700">
-                  <div className="font-bold text-purple-950 flex items-center justify-between">
-                    <span>• {extra.title}</span>
-                    {extra.year && <span className="text-[10px] text-slate-500 font-mono">{extra.year}</span>}
+                <div key={extra.id} className="text-xs text-slate-700 p-3 rounded-2xl bg-white/60 border border-purple-100/80 hover:bg-white/90 transition-colors">
+                  <div className="font-bold text-purple-950 flex flex-wrap items-center justify-between gap-1 mb-1">
+                    <span className="text-xs font-extrabold text-slate-900">• {extra.title}</span>
+                    {extra.year && (
+                      <span className="text-[10px] text-purple-800 bg-purple-50 px-2 py-0.5 rounded-md font-mono font-bold border border-purple-200/60">
+                        {extra.year}
+                      </span>
+                    )}
                   </div>
-                  <p className="text-[11px] text-slate-600 pl-3 mt-0.5">
+                  {extra.organization && (
+                    <div className="text-[11px] font-semibold text-purple-700 pl-2 mb-1.5 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                      {extra.organization}
+                    </div>
+                  )}
+                  <p className="text-[11px] text-slate-600 pl-2 leading-relaxed whitespace-pre-line">
                     {extra.description}
                   </p>
                 </div>

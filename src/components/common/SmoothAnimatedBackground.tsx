@@ -140,7 +140,7 @@ export const SmoothAnimatedBackground: React.FC<SmoothAnimatedBackgroundProps> =
   }, [particleCount]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 print:hidden print-hide">
       {/* 1. Base Subtle Ambient Mesh Gradients */}
       <div 
         className="absolute top-[-10%] left-[-5%] w-[55vw] h-[55vw] rounded-full bg-purple-300/25 blur-[120px] animate-pulse-glow"

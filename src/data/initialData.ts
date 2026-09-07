@@ -125,9 +125,9 @@ export const INITIAL_PROFILE: ProfileData = {
     },
     {
       id: "extra-robotics",
-      title: "National Representative & Team Member",
-      organization: "Zambia Robotics Team (FIRST Global Challenge)",
-      description: "Represented Zambia at the international FIRST Global Robotics Challenge, designing, programming, and operating competition robots tackling international environmental engineering challenges.",
+      title: "National Representative & Core Robotics Engineer",
+      organization: "Zambia National Robotics Team • FIRST Global Challenge (Singapore 2023)",
+      description: "Selected to represent the Republic of Zambia on the global stage at the 2023 FIRST Global Robotics Challenge held in Singapore (Singapore EXPO), uniting youth engineers from over 190 nations to tackle international environmental engineering and clean renewable energy challenges under the 'Hydrogen Horizons' theme.",
       year: "2023"
     },
     {
@@ -176,10 +176,10 @@ export const INITIAL_PROFILE: ProfileData = {
     },
     {
       id: "aw-first-global",
-      title: "FIRST Global Robotics Certificate of International Participation",
-      issuer: "FIRST Global Robotics International",
+      title: "FIRST Global Robotics International Participation Certificate (Singapore 2023)",
+      issuer: "FIRST Global Challenge & Republic of Singapore (Team Zambia)",
       year: "2023",
-      description: "Recognized for representing the Republic of Zambia on the global robotics stage."
+      description: "Conferred upon Derrick Kondwani Mbewe for representing the Republic of Zambia at the international FIRST Global Robotics Challenge in Singapore, designing competition robots tackling renewable clean energy and environmental engineering alongside 190+ nations."
     }
   ],
   skills: [
@@ -361,6 +361,19 @@ export const INITIAL_PROFILE: ProfileData = {
       skillsAcquired: ["Educational Leadership", "Mental Health Advocacy", "Institutional Wellness", "Workshop Facilitation"],
       verified: true,
       badgeColor: "rose"
+    },
+    {
+      id: "cert-first-global-singapore",
+      title: "FIRST Global Challenge Certificate of International Participation – Team Zambia (Singapore)",
+      issuer: "FIRST Global Challenge & Singapore EXPO (Team Zambia)",
+      issueDate: "October 2023",
+      credentialId: "FIRST_GLOBAL_2023_TEAM_ZAMBIA_SINGAPORE_DKM",
+      credentialUrl: "https://first.global/2023-nations/zambia-2023/",
+      category: "robotics",
+      description: "Official Certificate of International Participation awarded to Derrick Kondwani Mbewe for representing the Republic of Zambia at the 2023 FIRST Global Robotics Challenge in Singapore, uniting over 190 nations to solve global clean energy and environmental engineering challenges under the 'Hydrogen Horizons' theme.",
+      skillsAcquired: ["Robotics Engineering", "Autonomous & Driver-Controlled Systems", "International STEM Diplomacy", "Environmental Engineering", "Rapid Mechanical Prototyping", "Team Zambia Global Representation"],
+      verified: true,
+      badgeColor: "amber"
     },
     {
       id: "cert-first-global-video",

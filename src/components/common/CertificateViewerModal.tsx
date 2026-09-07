@@ -12,7 +12,9 @@ import {
   ZoomIn, 
   ZoomOut,
   RotateCcw,
-  Maximize2
+  Maximize2,
+  Globe,
+  Bot
 } from 'lucide-react';
 import { sound } from '../../utils/soundEffects';
 
@@ -527,7 +529,138 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
       );
     }
 
-    // 6. FIRST Global Video Training Course
+    // 6. FIRST Global Challenge 2023 Singapore - International Participation Certificate (Team Zambia)
+    if (id === 'cert-first-global-singapore') {
+      return (
+        <div className="bg-gradient-to-b from-[#fbfbfe] via-white to-[#f8faff] p-8 sm:p-12 md:p-14 rounded-xl border-[5px] border-[#0a2540] shadow-2xl relative select-none font-serif min-h-[620px] w-full flex flex-col justify-between print:border-none print:shadow-none">
+          {/* Inner Golden Foil Border Line */}
+          <div className="absolute inset-2 sm:inset-3 border border-[#c59b27]/60 pointer-events-none rounded-lg" />
+          
+          {/* Subtle Background Watermark Globe */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-[0.035] pointer-events-none overflow-hidden">
+            <Globe className="w-96 h-96 text-[#0a2540]" />
+          </div>
+
+          {/* Top Header: FIRST Global & Singapore 2023 Host Bar */}
+          <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-200/80 pb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-[#0a2540] text-white flex items-center justify-center shadow-md border border-[#c59b27]">
+                <Bot className="w-6 h-6 text-[#c59b27]" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-base font-black tracking-widest text-[#0a2540] font-sans">FIRST</span>
+                  <span className="text-base font-bold tracking-widest text-slate-700 font-sans">GLOBAL</span>
+                </div>
+                <div className="text-[10px] font-bold text-slate-500 font-sans tracking-wide uppercase">
+                  Olympic-Style International Robotics
+                </div>
+              </div>
+            </div>
+
+            {/* Host City & Nation Flag Accent */}
+            <div className="text-left sm:text-right font-sans">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-amber-300 text-[11px] font-bold shadow-xs">
+                <Globe className="w-3.5 h-3.5 text-amber-400" />
+                <span>Singapore 2023 • Singapore EXPO</span>
+              </div>
+              <div className="text-[10px] text-slate-500 font-medium mt-1">
+                Theme: <strong className="text-slate-800 font-semibold">Hydrogen Horizons</strong> • 190+ Nations
+              </div>
+            </div>
+          </div>
+
+          {/* National Team Zambia Decorative Ribbon Stripe */}
+          <div className="relative z-10 my-3 flex items-center justify-center gap-1">
+            <span className="h-1 w-12 bg-[#197B30] rounded-full" title="Zambia Green" />
+            <span className="h-1 w-8 bg-[#DE2010] rounded-full" title="Zambia Red" />
+            <span className="h-1 w-8 bg-[#000000] rounded-full" title="Zambia Black" />
+            <span className="h-1 w-8 bg-[#EF7D00] rounded-full" title="Zambia Orange" />
+          </div>
+
+          {/* Certificate Main Body */}
+          <div className="text-center my-4 sm:my-6 relative z-10 px-2 sm:px-6">
+            <p className="text-[11px] sm:text-xs font-sans font-bold tracking-[0.25em] text-[#c59b27] uppercase mb-1">
+              FIRST Global International Robotics
+            </p>
+
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0a2540] italic tracking-tight font-serif">
+              Certificate of International Participation
+            </h1>
+
+            <p className="text-xs sm:text-sm text-slate-600 mt-4 font-sans font-medium">
+              This certificate is proudly conferred upon
+            </p>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight font-serif my-3 border-b-2 border-slate-200 pb-2 inline-block max-w-xl">
+              Derrick Kondwani Mbewe
+            </h2>
+
+            <div className="flex items-center justify-center gap-2 mt-2">
+              <span className="inline-block px-3.5 py-1 rounded-lg bg-[#0a2540] text-white font-sans text-xs font-bold tracking-wider uppercase shadow-sm">
+                Team Zambia • National Robotics Representative
+              </span>
+            </div>
+
+            <p className="text-xs sm:text-sm text-slate-700 font-sans mt-4 max-w-2xl mx-auto leading-relaxed">
+              for successfully representing the <strong className="text-slate-900 font-semibold">Republic of Zambia</strong> at the <strong className="text-slate-900 font-semibold">2023 FIRST Global Robotics Challenge</strong> held in <strong className="text-slate-900 font-semibold">Singapore</strong> (Singapore EXPO) from October 7–10, 2023. Recognized for exemplary dedication, technical innovation, and international STEM diplomacy in designing, building, programming, and operating competition robots tackling pressing global environmental engineering and renewable clean energy challenges under the <em className="text-[#0a2540] font-semibold">Hydrogen Horizons</em> challenge.
+            </p>
+          </div>
+
+          {/* Verification Badges Row */}
+          <div className="relative z-10 grid grid-cols-3 gap-2 sm:gap-4 my-2 p-3 rounded-xl bg-slate-50/90 border border-slate-200 font-sans text-center text-xs">
+            <div>
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Host Nation</span>
+              <span className="font-bold text-slate-800">Singapore 🇸🇬</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Represented</span>
+              <span className="font-bold text-[#197B30]">Republic of Zambia 🇿🇲</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Global Scale</span>
+              <span className="font-bold text-slate-800">190+ National Alliances</span>
+            </div>
+          </div>
+
+          {/* Bottom Seals and Signatures */}
+          <div className="relative z-10 pt-4 border-t border-slate-200 flex flex-wrap items-end justify-between gap-4 font-sans">
+            {/* Left: Founder Signature */}
+            <div className="text-left">
+              <div className="font-serif italic text-base sm:text-lg text-slate-800 font-bold tracking-wide">
+                Dean Kamen
+              </div>
+              <div className="text-[11px] font-bold text-slate-900">Dean Kamen</div>
+              <div className="text-[10px] text-slate-500">Founder, FIRST & FIRST Global</div>
+            </div>
+
+            {/* Center: Gold Embossed Seal */}
+            <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full border-4 border-[#c59b27] bg-gradient-to-br from-amber-200 via-amber-300 to-yellow-500 flex flex-col items-center justify-center text-center p-1 shadow-lg text-[#0a2540]">
+              <Award className="w-6 h-6 text-[#0a2540] shrink-0" />
+              <div className="text-[7px] font-black uppercase tracking-tight leading-tight mt-0.5">
+                FIRST GLOBAL
+              </div>
+              <div className="text-[6px] font-bold uppercase tracking-wider text-slate-800">
+                SINGAPORE 2023
+              </div>
+            </div>
+
+            {/* Right: Organizing Committee & Credential ID */}
+            <div className="text-left sm:text-right">
+              <div className="text-[11px] font-bold text-slate-900">
+                FIRST Global Organizing Committee
+              </div>
+              <div className="text-[10px] text-slate-500">Singapore EXPO • October 2023</div>
+              <div className="text-[9px] font-mono text-slate-400 mt-1">
+                ID: FIRST_GLOBAL_2023_TEAM_ZAMBIA_SINGAPORE_DKM
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 7. FIRST Global Video Training Course
     if (id === 'cert-first-global-video') {
       return (
         <div className="bg-white p-8 sm:p-12 md:p-16 rounded-xl border-[4px] border-[#0a3871] shadow-2xl relative select-none font-serif min-h-[560px] w-full flex flex-col justify-between print:border-none print:shadow-none">
@@ -609,15 +742,15 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-md animate-fade-in print:p-0 print:bg-white print:static print:h-auto print:overflow-visible"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-5xl h-[92vh] max-h-[92vh] bg-slate-900/95 rounded-2xl sm:rounded-3xl shadow-2xl border border-purple-300/40 overflow-hidden flex flex-col"
+        className="relative w-full max-w-5xl h-[92vh] max-h-[92vh] bg-slate-900/95 rounded-2xl sm:rounded-3xl shadow-2xl border border-purple-300/40 overflow-hidden flex flex-col print:max-w-none print:h-auto print:border-none print:bg-white print:p-0 print:shadow-none print:static"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Control Bar (Fixed Header) */}
-        <div className="px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-950 via-purple-900 to-indigo-950 text-white flex items-center justify-between gap-3 shadow-lg shrink-0 border-b border-purple-700/50 z-20">
+        <div className="px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-950 via-purple-900 to-indigo-950 text-white flex items-center justify-between gap-3 shadow-lg shrink-0 border-b border-purple-700/50 z-20 print:hidden print-hide">
           <div className="flex items-center gap-3 min-w-0">
             <div className="p-2 rounded-xl bg-white/10 text-purple-200 shrink-0">
               <Award className="w-4 h-4 text-purple-300" />
@@ -683,21 +816,21 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
         {/* Scrollable Certificate Viewer Canvas (Directly matching PDF viewer layout) */}
         <div 
           ref={modalBodyRef}
-          className="flex-1 overflow-y-auto overflow-x-auto p-4 sm:p-8 md:p-12 flex justify-center items-start bg-slate-950/90"
+          className="flex-1 overflow-y-auto overflow-x-auto p-4 sm:p-8 md:p-12 flex justify-center items-start bg-slate-950/90 print:bg-white print:p-0 print:overflow-visible"
         >
           <div 
             style={{ 
               width: `${Math.round(8.27 * 96 * (zoomLevel / 100))}px`,
               maxWidth: zoomLevel <= 100 ? '100%' : 'none'
             }}
-            className="transition-all duration-150 my-auto shrink-0"
+            className="transition-all duration-150 my-auto shrink-0 print:w-full print:max-w-none print:m-0"
           >
             {renderCertificateContent()}
           </div>
         </div>
 
         {/* Bottom Navigation & Metadata Bar (Fixed Footer) */}
-        <div className="px-4 sm:px-6 py-3 bg-slate-900 border-t border-purple-900/80 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0 z-20 text-white">
+        <div className="px-4 sm:px-6 py-3 bg-slate-900 border-t border-purple-900/80 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0 z-20 text-white print:hidden print-hide">
           <div className="flex items-center gap-2 text-xs text-slate-300 w-full sm:w-auto justify-between sm:justify-start">
             <span className="font-semibold text-purple-200">Credential ID:</span>
             {certificate.credentialId ? (
